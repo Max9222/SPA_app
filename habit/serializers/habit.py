@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from habit.models import Habit
-from habit.validators.habit import *
+from habit.validators.habit import IsNiceValidator, NiceValidator, TimeValidator, PeriodValidator
 
 
 class PleasureHabitSerializer(serializers.ModelSerializer):

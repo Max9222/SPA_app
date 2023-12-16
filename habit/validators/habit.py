@@ -14,8 +14,12 @@ class NiceValidator:
 
         if habit_is_nice and habit_reward is not None:
             raise ValidationError('Награды нет.')
+
         if habit_is_nice and habit_is_pleasant is not None:
             raise ValidationError('Исключено выбирать приятную и связанную привычки одновременно!')
+
+        if habit_is_pleasant and habit_reward is None:
+            raise ValidationError('Можно выбрать связанную привычку и награду одновременно!')
 
 
 class TimeValidator:
@@ -26,8 +30,7 @@ class TimeValidator:
 
     def __call__(self, value):
         complete_time = dict(value).get(self.field)
-        seconds = complete_time.hour * 3600 + complete_time.minute * 60 + complete_time.second
-        if seconds > 120:
+        if int(complete_time) > 120:
             raise ValidationError('Время выполнения должно быть не больше 120 секунд!')
 
 
@@ -53,5 +56,5 @@ class PeriodValidator:
 
     def __call__(self, value):
         tmp_val = dict(value).get(self.field)
-        if tmp_val > 7:
+        if int(tmp_val) > 7:
             raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней!')
