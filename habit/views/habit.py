@@ -11,7 +11,8 @@ class HabitCreateView(generics.CreateAPIView):
     """Создает привычку"""
     serializer_class = HabitCreateSerializer
     queryset = Habit.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         new_habit = serializer.save()
@@ -23,11 +24,12 @@ class HabitListView(generics.ListAPIView):
     """Выводим список привычек"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     pagination_class = HabitsPagination
 
     def get_queryset(self):
-        return Habit.object.filter(user=self.request.user)
+        return Habit.objects.filter(owner=self.request.user)
 
 
 class HabitRetrieveView(generics.RetrieveAPIView):
