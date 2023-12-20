@@ -13,6 +13,7 @@ class HabitCreateView(generics.CreateAPIView):
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated]
 
+
     def perform_create(self, serializer):
         new_habit = serializer.save()
         new_habit.user = self.request.user
@@ -24,10 +25,11 @@ class HabitListView(generics.ListAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated]
+
     pagination_class = HabitsPagination
 
     def get_queryset(self):
-        return Habit.object.filter(user=self.request.user)
+        return Habit.objects.filter(owner=self.request.user)
 
 
 class HabitRetrieveView(generics.RetrieveAPIView):
