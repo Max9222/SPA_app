@@ -19,7 +19,7 @@ class Habit(models.Model):
     published = models.BooleanField(verbose_name='Признак публичности', default=False)
 
     def __str__(self):
-        return f"{self.action} нравится {self.owner}"
+        return f"Действие: {self.action}, место: {self.place}, время на выполнение: {self.time_period} минута"
 
     class Meta:
         verbose_name = 'Привычка'
