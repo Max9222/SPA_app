@@ -169,7 +169,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
     'user_activity_check': {
-        'task': 'users.tasks.telegram_bot',
+        'task': 'habit.tasks.telegram_bot',
         'schedule': timedelta(minutes=10),
     },
 }
