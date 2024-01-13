@@ -23,7 +23,7 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'django-insecure-=+5cfd*iq)qh881@ny08kre-w4=ou9c+(v5rhvet!6&j(uvz95'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,10 +89,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',   # 'NAME': 'spa_app',
-        'USER': os.getenv('USER_POSTGRES'),
-        'PASSWORD': os.getenv('PASSWORD_POSTGRES'),
-        'HOST': 'db'   # 'HOST': '127.0.0.1'
+        'NAME': 'shelterdocker',   # 'NAME': 'spa_app',
+        'USER': 'postgres',
+        'PASSWORD': 'mysecretpassword',
+        'HOST': 'db',   # 'HOST': '127.0.0.1'
+
     }
 }
 
