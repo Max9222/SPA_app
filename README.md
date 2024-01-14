@@ -20,7 +20,7 @@
     - Осуществлена интеграция с Telegram Bot
     - Настроена рассылка напоминаний (переодические задачи)
 
-На базе фреймворка Django 5.0
+На базе фреймворка Django
     Так же были использованы следующие библиотеки:
         Python
         Django
@@ -34,17 +34,26 @@
         CORS
         Swagger
 
-Для работы проекта необходимо выполнить следующие шаги:
-1. python3 -m venv env (Создаем виртуальное окружение)
-2. source env/bin/activate (Активируем виртуальное окружение)
-3. pip install -r requirements.txt (Подгружаем зависимости)
-4. python3 manage.py makemigrations (Создаем миграции)
-5. python3 manage.py migrate (Применяем миграции)
-6. Подключаем свой TG Bot https://t.me/BotFather (TELEGRAM_TOKEN и TELEGRAM_ID вставляем в файл .env)
+Проект разворачивается на платформе Docker и состоит из 5 контейнеров:
+1. db
+2. redis
+3. app
+4. celery
+5. celery_beat    
+
+Для работы проекта необходимо:
+- Скачать проект с https://github.com/ и запустить с помощью вашей локальной машины при этом не забыв установить Docker
+- Добавить переменные окружения в файл .env
+И в командной строке проекта сделать следующие шаги:
+1. docker-compose build (Сборка образов)
+2. docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres (Создание db, пользователя и пароль)
+3. docker-compose up (Запуск контейнеров)
 
 Переменные окружения продублированы в файле .env.sample (Заполняем и все начинает работать)
-    USER_POSTGRES=
-    PASSWORD_POSTGRES=
+    DB_NAME=
+    POSTGRES_USER=
+    POSTGRES_PASSWORD=
+    PGDATA=
     SECRET_KEY=
     TELEGRAM_TOKEN=
     TELEGRAM_ID=
@@ -62,6 +71,6 @@
     - Каждый пользователь имеет доступ только к своим привычкам по механизму CRUD.
     - Пользователь может видеть список публичных привычек без возможности их как-то редактировать или удалять.
 
-Эндпоинты: можно посмотреть в Документации: по ссылке http://127.0.0.1:8000/swagger/
+Эндпоинты: можно посмотреть в Документации: по ссылке http://localhost:8000//swagger/
 
 Безопасность: настроен CORS.
